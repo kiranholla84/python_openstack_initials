@@ -10,21 +10,21 @@ nova = nClient.Client('2', "admin" , "devstack" , "admin", "http://10.108.203.12
 
 print "===============CREATE, UPDATE, DELETE VOLUMES======================"
 print "Create empty volumes (sample-1, sample-2)."
-volume01 = cinder.volumes.create(size=1, name='sample-1',
+volume01 = cinder.volumes.create(size=1, name='newsample-1',
                                  description='test volume No.1')
-volume02 = cinder.volumes.create(size=1, name='sample-2')
+volume02 = cinder.volumes.create(size=1, name='newsample-2')
 
 while (volume01.status != 'available'):
-    print "Wait sample-1 to be available."
+    print "Waiting for sample-1 to be available."
     time.sleep(10)
     volume01 = cinder.volumes.get(volume01.id)
 
 while (volume02.status != 'available'):
-    print "Wait sample-2 to be available."
+    print "Waiting for sample-2 to be available."
     time.sleep(10)
     volume02 = cinder.volumes.get(volume02.id)
 
-print "Update an attribute."
+print "Updating an attribute."
 volume02.update(description='test volume No.2')
 
 print "List all volumes"
@@ -42,7 +42,7 @@ cinder.volumes.delete(volume02)
 while (volume01):
     try:
         cinder.volumes.get(volume01.id)
-        print "Wait sample-1 to be deleted."
+        print "Waiting for sample-1 to be deleted."
         time.sleep(10)
     except:
         volume01=None
@@ -50,7 +50,7 @@ while (volume01):
 while (volume02):
     try:
         cinder.volumes.get(volume02.id)
-        print "Wait sample-2 to be deleted."
+        print "Waiting for sample-2 to be deleted."
         time.sleep(10)
     except:
         volume02=None
